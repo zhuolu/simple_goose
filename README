@@ -1,0 +1,26 @@
+----------------------------------------------------------------
+  Simple IEC61850 GOOSE Module
+
+The simple GOOSE module is FREE software under the terms of 
+the GNU General Public License as published by the Free Soft-
+ware Foundation.
+----------------------------------------------------------------
+
+File list:
+
+src/            Sources for Linux kernel module
+usrc/           Sources for user space library
+README          Readme file
+Makefile        Makefile for All
+
+
+src--|--goose_main.c      main file for kernel module
+     |--goose_module.h    header file for kernel module
+     |--proto_goose.h     protocol info
+
+usrc-|--Makefile          Makefile
+    -|--nl_if_goose.c     Library of user-space APIs
+    -|--nl_if_goose.h     Head file for user-space APIs
+    -|
+    -|--gs_recv.c         GOOSE Receiver example
+    -|--gs_tran.c         GOOSE Transmitter example
