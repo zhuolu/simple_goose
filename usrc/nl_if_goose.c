@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <semaphore.h>
 
 #include "nl_if_goose.h"
 
