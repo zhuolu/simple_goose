@@ -6,12 +6,14 @@
  * Dev. Plat.  : kernel version 2.6.31-17, gcc version 4.4.1
  *
  */
- 
+
+/* Modified by Timothy Middelkoop <timothy.middelkoop@gmail.com> */
+
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/proc_fs.h>
 #include <linux/skbuff.h>
-#include <linux/smp_lock.h>
+#include <linux/kthread.h>
 
 #include <net/sock.h>
 #include <net/netlink.h>
@@ -31,7 +33,7 @@
 MODULE_LICENSE("Dual BSD/GPL");
 MODULE_AUTHOR("Zhuo Lu, NetWis, NCSU.");
 MODULE_DESCRIPTION("GOOSE messaging module");
-MODULE_VERSION("0.3.0");
+MODULE_VERSION("0.3.1");
 
 /* Module Parameters */
 static short int tran_active = 1;
@@ -450,10 +452,7 @@ goose_trans_skb_fail:
 static int daemon(void* arg)
 {	
 	dmn_task=current;
-	lock_kernel();
 	daemonize("GOOSE daemon");
-	allow_signal(SIGTERM);
-	unlock_kernel();
 	
 	printk("GOOSE: daemon is up.\n");
 		
@@ -506,7 +505,7 @@ static int __init goose_init(void)
 	/* register GOOSE protocol */
 	dev_add_pack(&goose_packet_type);
 	
-	kernel_thread(daemon, NULL, 0);
+	/* kernel_thread(daemon, NULL, 0); */
 
 	return 0;
 }
