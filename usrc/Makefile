@@ -14,8 +14,8 @@ LFLAGS = -lpthread
 all:	$(TARGET)
 
 $(TARGET):	$(OBJS)
-	$(CC) $(CFLAGS) $(LFLAGS) -o $(PWD)/gs_tran gs_tran.o nl_if_goose.o
-	$(CC) $(CFLAGS) $(LFLAGS) -o $(PWD)/gs_recv gs_recv.o nl_if_goose.o
+	$(CC) $(CFLAGS) -o $(PWD)/gs_tran gs_tran.o nl_if_goose.o $(LFLAGS)
+	$(CC) $(CFLAGS) -o $(PWD)/gs_recv gs_recv.o nl_if_goose.o $(LFLAGS)
 
 $(OBJS): %.o: %.c
 	$(CC) $(CFLAGS) -I$(INC_PATH) -c $<
